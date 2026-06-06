@@ -1,26 +1,135 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --green-dark: #060f08;
+  --green-mid: #00a651;
+  --green-field: #1a7a3a;
+  --red: #e30613;
+  --gold: #d4a017;
+  --gold-light: #f5c842;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--green-dark);
+  color: #f0f0f0;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Patrón de fondo estilo cancha */
+.pitch-bg {
+  background-color: #060f08;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 60px,
+      rgba(0,166,81,0.04) 60px,
+      rgba(0,166,81,0.04) 120px
+    );
+}
+
+/* Animación shimmer para celdas */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, #0d2b14 25%, #1a5c2a 50%, #0d2b14 75%);
+  background-size: 200% auto;
+  animation: shimmer 1.5s infinite linear;
+}
+
+/* Animación de reveal del precio */
+@keyframes reveal {
+  0% { transform: scale(0) rotate(-15deg); opacity: 0; }
+  60% { transform: scale(1.15) rotate(3deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.reveal-animation {
+  animation: reveal 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Sobre de estampas — celdas del grid */
+.sticker-pack {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: transform 0.12s, box-shadow 0.12s;
+  background: linear-gradient(135deg, #1a4a2e 0%, #0d2b19 40%, #1a6035 70%, #0d3a20 100%);
+  border: 1px solid rgba(0,166,81,0.35);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.sticker-pack::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.sticker-pack:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 16px rgba(0,166,81,0.4), inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+.sticker-pack:active {
+  transform: scale(0.92);
+}
+
+/* Celda confirmada — dorado */
+.sticker-confirmed {
+  background: linear-gradient(135deg, #7a5800 0%, #c9a227 50%, #7a5800 100%);
+  border: 1px solid rgba(212,160,23,0.6);
+  box-shadow: 0 0 12px rgba(212,160,23,0.3);
+}
+
+/* Countdown digits */
+.countdown-digit {
+  background: rgba(0,166,81,0.15);
+  border: 1px solid rgba(0,166,81,0.3);
+  border-radius: 10px;
+  padding: 8px 12px;
+  min-width: 56px;
+  text-align: center;
+}
+
+/* Botón principal — rojo FIFA */
+.btn-primary {
+  background: linear-gradient(135deg, #e30613, #a00008);
+  color: white;
+  font-weight: 800;
+  border-radius: 14px;
+  padding: 16px 24px;
+  font-size: 1.1rem;
+  box-shadow: 0 6px 24px rgba(227,6,19,0.4);
+  transition: all 0.15s;
+}
+
+.btn-primary:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 32px rgba(227,6,19,0.5);
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+/* Botón secundario — verde */
+.btn-secondary {
+  background: rgba(0,166,81,0.12);
+  border: 1px solid rgba(0,166,81,0.35);
+  color: #4dda8a;
+  font-weight: 600;
+  border-radius: 14px;
+  padding: 12px 24px;
+  transition: all 0.15s;
+}
+
+.btn-secondary:hover {
+  background: rgba(0,166,81,0.2);
 }
