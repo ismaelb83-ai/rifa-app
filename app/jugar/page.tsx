@@ -212,6 +212,7 @@ export default function JugarPage() {
   function handleGoToSummary() {
     intentionalNav.current = true
     localStorage.setItem('cart', JSON.stringify(cart))
+    if (participant) localStorage.setItem('participant', JSON.stringify(participant))
     window.location.href = '/resumen'
   }
 
