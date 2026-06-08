@@ -195,7 +195,7 @@ export default function LandingPage() {
         >
           {[
             { label: 'Mínimo', value: '$50', color: '#00a651' },
-            { label: 'Máximo', value: '$300', color: '#e30613' },
+            { label: 'Máximo', value: '$300', color: '#3b82f6' },
             { label: 'Boletos', value: '100', color: '#d4a017' },
           ].map((s) => (
             <div key={s.label} className="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
