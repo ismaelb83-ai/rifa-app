@@ -35,7 +35,7 @@ export default function AdminPage() {
     reserved: 0,
     available: 0,
     collected: 0,
-    target: 10300,
+    target: 20000,
   })
 
   async function handleLogin(e: React.FormEvent) {
@@ -88,7 +88,7 @@ export default function AdminPage() {
         reserved: tickets.filter((t) => t.status === 'reserved').length,
         available: 100 - tickets.length,
         collected: confirmed.reduce((s, t) => s + t.price, 0),
-        target: 10300,
+        target: 20000,
       })
     } finally {
       setLoading(false)

@@ -194,8 +194,8 @@ export default function LandingPage() {
           className="grid grid-cols-3 gap-2"
         >
           {[
-            { label: 'Mínimo', value: '$10', color: '#00a651' },
-            { label: 'Máximo', value: '$200', color: '#e30613' },
+            { label: 'Mínimo', value: '$50', color: '#00a651' },
+            { label: 'Máximo', value: '$300', color: '#e30613' },
             { label: 'Boletos', value: '100', color: '#d4a017' },
           ].map((s) => (
             <div key={s.label} className="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
