@@ -261,7 +261,7 @@ export default function LandingPage() {
 
         {/* Footer */}
         <p className="text-center text-gray-700 text-xs pb-2">
-          🇲🇽 Somos México · FIFA World Cup 2026™
+          👨 Para el Mejor Papá
         </p>
       </div>
     </main>
