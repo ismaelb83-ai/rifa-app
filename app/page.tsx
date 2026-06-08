@@ -215,7 +215,7 @@ export default function LandingPage() {
           <p className="text-sm font-semibold text-gray-300">¿Cómo funciona?</p>
           {[
             '🎯 Elige un número del tablero y rásca para ver cuánto pagas',
-            '🎲 Tienes hasta 3 intentos — ¡cada rasca cambia los precios!',
+            '🎲 Tienes hasta 2 intentos — ¡cada rasca cambia los precios!',
             '🛒 Puedes comprar varios boletos en una sola sesión',
           ].map((step, i) => (
             <div key={i} className="flex items-start gap-3">

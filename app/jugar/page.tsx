@@ -21,7 +21,7 @@ type Participant = {
   name: string
 }
 
-const MAX_ATTEMPTS = 3
+const MAX_ATTEMPTS = 2
 const MAX_TICKETS = 5
 
 export default function JugarPage() {
