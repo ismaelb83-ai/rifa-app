@@ -17,15 +17,13 @@ body {
 
 /* Patrón de fondo estilo cancha */
 .pitch-bg {
-  background-color: #060f08;
+  background: linear-gradient(to bottom right, #111827, #1f2937, #111827);
   background-image:
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 60px,
-      rgba(0,166,81,0.04) 60px,
-      rgba(0,166,81,0.04) 120px
-    );
+    linear-gradient(to bottom right, #111827, #1f2937, #111827),
+    radial-gradient(circle at 15% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 85% 30%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 10% 80%, rgba(59, 130, 246, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 90% 70%, rgba(59, 130, 246, 0.07) 0%, transparent 50%);
 }
 
 /* Animación shimmer para celdas */
