@@ -183,25 +183,20 @@ export default function ResumenPage() {
                 <div className="space-y-2 text-sm text-gray-300">
                   <p>Realiza tu transferencia por <strong>${total}</strong> a:</p>
                   <div className="bg-white/5 rounded-xl p-3 space-y-2 text-xs">
-                    <div className="flex justify-between">
-                      <span className="text-gray-400">Banco:</span>
-                      <span className="text-white font-semibold">Banorte</span>
+                    <div>
+                      <p className="text-gray-400">Banco: <span className="text-white font-semibold">Banorte</span></p>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-400">Cuenta:</span>
-                      <span className="text-white font-mono">1036 1539 06</span>
+                    <div>
+                      <p className="text-gray-400">Cuenta: <span className="text-white font-mono">1036 1539 06</span></p>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-400">CLABE:</span>
-                      <span className="text-white font-mono">072580010361539062</span>
+                    <div>
+                      <p className="text-gray-400">CLABE: <span className="text-white font-mono">072580010361539062</span></p>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-400">Tarjeta:</span>
-                      <span className="text-white font-mono">4189143095744333</span>
+                    <div>
+                      <p className="text-gray-400">Tarjeta: <span className="text-white font-mono">4189143095744333</span></p>
                     </div>
-                    <div className="flex justify-between border-t border-white/10 pt-2 mt-2">
-                      <span className="text-gray-400">Titular:</span>
-                      <span className="text-white font-semibold">Ismael Briones</span>
+                    <div className="border-t border-white/10 pt-2 mt-2">
+                      <p className="text-gray-400">Titular: <span className="text-white font-semibold">Ismael Briones</span></p>
                     </div>
                   </div>
                   <p className="text-gray-400 text-xs">
