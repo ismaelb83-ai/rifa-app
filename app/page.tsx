@@ -83,7 +83,7 @@ export default function LandingPage() {
           className="flex justify-center"
         >
           <span className="bg-[#e30613]/20 text-red-400 text-sm font-bold px-4 py-1.5 rounded-full border border-red-500/30 tracking-wide uppercase">
-            ⚽ Rifa Mundialista 2026
+            🎁 Rifa Día del Padre
           </span>
         </motion.div>
 
@@ -133,7 +133,7 @@ export default function LandingPage() {
         {/* COUNTDOWN — activar cuando se acerque la fecha
         <motion.div className="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-3">
           <p className="text-center text-xs font-semibold text-gray-400 uppercase tracking-widest">
-            ⏱ Sorteo el 11 de junio, 2026
+            ⏱ Sorteo el 20 de junio, 2026
           </p>
           <div className="flex justify-center gap-2">
             {[
@@ -156,7 +156,7 @@ export default function LandingPage() {
         {/* Fecha del sorteo — texto simple mientras no hay countdown */}
         <div className="text-center">
           <p className="text-sm text-gray-400">
-            ⏱ Sorteo: <span className="text-white font-semibold">11 de junio, 2026</span>
+            ⏱ Sorteo: <span className="text-white font-semibold">20 de junio, 2026</span>
           </p>
         </div>
 
