@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="h-full">
-      <body className={`${inter.className} min-h-full flex flex-col bg-[#060f08] text-white`}>
+      <body className={`${inter.className} min-h-full flex flex-col bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white father-day-bg`}>
         {children}
       </body>
     </html>

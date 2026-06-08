@@ -133,3 +133,40 @@ body {
 .btn-secondary:hover {
   background: rgba(0,166,81,0.2);
 }
+
+/* Fondo Día del Padre */
+.father-day-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.father-day-bg::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 85% 30%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 10% 80%, rgba(59, 130, 246, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 90% 70%, rgba(59, 130, 246, 0.07) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.father-day-bg::after {
+  content: '👨 🎁 👨 🎁 👨 🎁 👨 🎁 👨 🎁 👨 🎁 👨 🎁 👨 🎁 👨 🎁 👨 🎁 👨 🎁 👨 🎁 👨 🎁 👨 🎁';
+  position: fixed;
+  inset: 0;
+  font-size: 3rem;
+  opacity: 0.03;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  word-break: break-all;
+  line-height: 1.2;
+}
+
+main, body > div {
+  position: relative;
+  z-index: 1;
+}
