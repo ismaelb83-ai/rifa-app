@@ -99,26 +99,26 @@ export default function LandingPage() {
               <div className="bg-gradient-to-br from-[#d4a017] to-[#7a5800] p-5 rounded-full shadow-2xl shadow-yellow-600/30">
                 <Trophy className="w-14 h-14 text-white" />
               </div>
-              <span className="absolute -top-1 -right-1 text-2xl">⚽</span>
+              <span className="absolute -top-1 -right-1 text-2xl">👨</span>
             </div>
           </div>
           <div className="space-y-1">
             <h1 className="text-3xl font-black tracking-tight leading-tight">
-              Álbum Panini
+              Rifa
               <br />
               <span className="bg-gradient-to-r from-[#d4a017] to-[#f5c842] bg-clip-text text-transparent">
-                FIFA World Cup 2026™
+                Día del Padre
               </span>
             </h1>
-            <p className="text-gray-400 text-sm">Pasta dura · Edición México</p>
+            <p className="text-gray-400 text-sm">3 premios increíbles</p>
           </div>
 
           {/* Contenido del premio */}
           <div className="grid grid-cols-3 gap-2">
             {[
-              { icon: '📖', label: 'Álbum', sub: 'Pasta dura' },
-              { icon: '📦', label: '100 sobres', sub: 'Panini' },
-              { icon: '🎴', label: '30 sobres', sub: 'Coca-Cola' },
+              { icon: '🔥', label: '1er Premio', sub: 'Asador + Carne' },
+              { icon: '🥃', label: '2do Premio', sub: 'Whiskey + Botana' },
+              { icon: '⌚', label: '3er Premio', sub: 'Reloj + Billetera' },
             ].map((item) => (
               <div key={item.label} className="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
                 <span className="text-2xl">{item.icon}</span>
@@ -241,7 +241,7 @@ export default function LandingPage() {
               style={{ boxShadow: '0 8px 32px rgba(0,166,81,0.45)', background: 'linear-gradient(135deg, #00a651 0%, #007a3a 50%, #00a651 100%)' }}
             >
               <div className="px-6 py-5 flex flex-col items-center gap-1">
-                <span className="text-3xl">⚽</span>
+                <span className="text-3xl">🎁</span>
                 <span className="text-white font-black text-xl tracking-tight">¡Quiero participar!</span>
                 <span className="text-green-200 text-xs font-medium">
                   Toca aquí para elegir tu número de la suerte
