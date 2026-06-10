@@ -423,15 +423,17 @@ export default function JugarPage() {
             </div>
 
             {/* Leyenda */}
-            <div className="flex items-center justify-center gap-4 mt-4 text-xs text-gray-400">
+            <div className="flex items-center justify-center gap-4 mt-4 text-xs text-gray-400 flex-wrap">
               <div className="flex items-center gap-1.5">
                 <div className="w-3 h-3 rounded" style={{ background: 'linear-gradient(135deg,#1a5c2a,#0d3a1a)', border: '1.5px solid #00a651' }} />
                 <span className="text-green-400">Disponible</span>
               </div>
-              <div className="flex items-center gap-1.5">
-                <div className="w-3 h-3 rounded" style={{ background: 'linear-gradient(135deg,#c9a227,#7a5800)', border: '1.5px solid #d4a017' }} />
-                <span className="text-yellow-400">Mi boleto ✓</span>
-              </div>
+              {cart.length > 1 && (
+                <div className="flex items-center gap-1.5">
+                  <div className="w-3 h-3 rounded" style={{ background: 'linear-gradient(135deg,#c9a227,#7a5800)', border: '1.5px solid #d4a017' }} />
+                  <span className="text-yellow-400">Mis boletos ✓</span>
+                </div>
+              )}
               <div className="flex items-center gap-1.5">
                 <div className="w-3 h-3 rounded" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }} />
                 <span className="text-gray-600">Tomado</span>
