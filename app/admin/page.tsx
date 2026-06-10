@@ -30,6 +30,7 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(false)
   const [search, setSearch] = useState('')
   const [confirming, setConfirming] = useState<string | null>(null)
+  const [deleting, setDeleting] = useState<string | null>(null)
   const [stats, setStats] = useState({
     confirmed: 0,
     reserved: 0,
@@ -106,6 +107,21 @@ export default function AdminPage() {
       if (res.ok) await fetchData()
     } finally {
       setConfirming(null)
+    }
+  }
+
+  async function deleteParticipant(participantId: string) {
+    if (!confirm('¿Eliminar este participante y liberar sus números?')) return
+    setDeleting(participantId)
+    try {
+      const res = await fetch('/api/admin/delete-participant', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ participantId }),
+      })
+      if (res.ok) await fetchData()
+    } finally {
+      setDeleting(null)
     }
   }
 
@@ -259,14 +275,23 @@ export default function AdminPage() {
                 </div>
 
                 {!entry.allConfirmed && (
-                  <button
-                    onClick={() => confirmPayment(entry.id)}
-                    disabled={confirming === entry.id}
-                    className="w-full bg-green-500/15 border border-green-500/30 text-green-400 font-medium py-2.5 rounded-lg text-sm flex items-center justify-center gap-2 hover:bg-green-500/25 transition-all disabled:opacity-50"
-                  >
-                    <Check className="w-4 h-4" />
-                    {confirming === entry.id ? 'Confirmando...' : 'Confirmar pago'}
-                  </button>
+                  <div className="space-y-2">
+                    <button
+                      onClick={() => confirmPayment(entry.id)}
+                      disabled={confirming === entry.id}
+                      className="w-full bg-green-500/15 border border-green-500/30 text-green-400 font-medium py-2.5 rounded-lg text-sm flex items-center justify-center gap-2 hover:bg-green-500/25 transition-all disabled:opacity-50"
+                    >
+                      <Check className="w-4 h-4" />
+                      {confirming === entry.id ? 'Confirmando...' : 'Confirmar pago'}
+                    </button>
+                    <button
+                      onClick={() => deleteParticipant(entry.id)}
+                      disabled={deleting === entry.id}
+                      className="w-full bg-red-500/15 border border-red-500/30 text-red-400 font-medium py-2.5 rounded-lg text-sm flex items-center justify-center gap-2 hover:bg-red-500/25 transition-all disabled:opacity-50"
+                    >
+                      🗑️ {deleting === entry.id ? 'Eliminando...' : 'Eliminar y liberar números'}
+                    </button>
+                  </div>
                 )}
 
                 {entry.allConfirmed && (
