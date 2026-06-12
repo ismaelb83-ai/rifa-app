@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
   // Verificar si el teléfono ya existe con boletos activos
   const { data: existing } = await supabase
     .from('participants')
-    .select('id, tickets(status)')
+    .select('id, name, email, tickets(status)')
     .eq('phone', cleanPhone)
     .maybeSingle()
 
