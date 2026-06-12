@@ -83,7 +83,7 @@ export default function LandingPage() {
           className="flex justify-center"
         >
           <span className="bg-[#e30613]/20 text-red-400 text-sm font-bold px-4 py-1.5 rounded-full border border-red-500/30 tracking-wide uppercase">
-            🎁 Rifa Día del Padre
+            🎁 Rifa Mes de Papá
           </span>
         </motion.div>
 
@@ -107,7 +107,7 @@ export default function LandingPage() {
               Rifa
               <br />
               <span className="bg-gradient-to-r from-[#d4a017] to-[#f5c842] bg-clip-text text-transparent">
-                Día del Padre
+                Mes de Papá
               </span>
             </h1>
             <p className="text-gray-400 text-sm">3 premios increíbles</p>
