@@ -153,12 +153,6 @@ export default function LandingPage() {
         </motion.div>
         */}
 
-        {/* Fecha del sorteo — texto simple mientras no hay countdown */}
-        <div className="text-center">
-          <p className="text-sm text-gray-400">
-            ⏱ Sorteo: <span className="text-white font-semibold">20 de junio, 2026</span>
-          </p>
-        </div>
 
         {/* Progreso */}
         <motion.div
