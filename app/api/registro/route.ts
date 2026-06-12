@@ -19,6 +19,8 @@ export async function POST(req: NextRequest) {
     .eq('phone', cleanPhone)
     .maybeSingle()
 
+  let participant: any
+
   if (existing) {
     const hasTickets = (existing.tickets as { status: string }[])?.some(
       (t) => t.status === 'confirmed' || t.status === 'reserved'
@@ -29,34 +31,47 @@ export async function POST(req: NextRequest) {
         { status: 409 }
       )
     }
-    // Teléfono existe pero sin boletos: limpiar completamente
-    // Liberar todos los boletos (aunque no haya reserved)
+    // Teléfono existe pero sin boletos: limpiar y reutilizar
+    // Liberar todos los boletos
     await supabase
       .from('tickets')
       .update({ status: 'available', participant_id: null, session_id: null, reserved_at: null })
       .eq('participant_id', existing.id)
 
-    // Eliminar todas sus sesiones
+    // Eliminar todas sus sesiones anteriores
     await supabase
       .from('game_sessions')
       .delete()
       .eq('participant_id', existing.id)
 
-    // Eliminar el participante huérfano
-    await supabase
+    // Actualizar datos del participante
+    const { data: updated, error: updateError } = await supabase
       .from('participants')
-      .delete()
+      .update({ name: name.trim(), email: email?.trim() || null })
       .eq('id', existing.id)
+      .select()
+      .single()
+
+    if (updateError || !updated) {
+      return NextResponse.json({ error: 'Error al actualizar registro' }, { status: 500 })
+    }
+    participant = updated
+  } else {
+    // Crear nuevo participante
+    const { data: newParticipant, error } = await supabase
+      .from('participants')
+      .insert({ name: name.trim(), phone: cleanPhone, email: email?.trim() || null })
+      .select()
+      .single()
+
+    if (error || !newParticipant) {
+      return NextResponse.json({ error: 'Error al registrar' }, { status: 500 })
+    }
+    participant = newParticipant
   }
 
-  const { data: participant, error } = await supabase
-    .from('participants')
-    .upsert(
-      { name: name.trim(), phone: cleanPhone, email: email?.trim() || null },
-      { onConflict: 'phone' }
-    )
-    .select()
-    .single()
+  if (!participant) {
+    return NextResponse.json({ error: 'Error al registrar' }, { status: 500 })
 
   if (error || !participant) {
     return NextResponse.json({ error: 'Error al registrar' }, { status: 500 })
