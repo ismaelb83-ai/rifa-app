@@ -211,6 +211,7 @@ export default function LandingPage() {
             '🎯 Elige un número del tablero y rásca para ver cuánto pagas',
             '🎲 Tienes hasta 2 intentos — ¡cada rasca cambia los precios!',
             '🛒 Puedes comprar varios boletos en una sola sesión',
+            '📅 El sorteo será una vez vendidos todos los boletos',
           ].map((step, i) => (
             <div key={i} className="flex items-start gap-3">
               <span className="text-sm leading-relaxed text-gray-400">{step}</span>
