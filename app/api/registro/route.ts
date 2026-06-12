@@ -44,18 +44,8 @@ export async function POST(req: NextRequest) {
       .delete()
       .eq('participant_id', existing.id)
 
-    // Actualizar datos del participante
-    const { data: updated, error: updateError } = await supabase
-      .from('participants')
-      .update({ name: name.trim(), email: email?.trim() || null })
-      .eq('id', existing.id)
-      .select()
-      .single()
-
-    if (updateError || !updated) {
-      return NextResponse.json({ error: 'Error al actualizar registro' }, { status: 500 })
-    }
-    participant = updated
+    // Reutilizar el participante existente
+    participant = { id: existing.id, name: existing.name, phone: cleanPhone, email: existing.email }
   } else {
     // Crear nuevo participante
     const { data: newParticipant, error } = await supabase
