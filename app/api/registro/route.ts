@@ -72,9 +72,6 @@ export async function POST(req: NextRequest) {
 
   if (!participant) {
     return NextResponse.json({ error: 'Error al registrar' }, { status: 500 })
-
-  if (error || !participant) {
-    return NextResponse.json({ error: 'Error al registrar' }, { status: 500 })
   }
 
   const sessionId = randomUUID()
