@@ -29,12 +29,24 @@ export async function POST(req: NextRequest) {
         { status: 409 }
       )
     }
-    // Teléfono existe pero sin boletos: limpiar sesión abandonada
+    // Teléfono existe pero sin boletos: limpiar completamente
+    // Liberar todos los boletos (aunque no haya reserved)
     await supabase
       .from('tickets')
       .update({ status: 'available', participant_id: null, session_id: null, reserved_at: null })
       .eq('participant_id', existing.id)
-      .eq('status', 'reserved')
+
+    // Eliminar todas sus sesiones
+    await supabase
+      .from('game_sessions')
+      .delete()
+      .eq('participant_id', existing.id)
+
+    // Eliminar el participante huérfano
+    await supabase
+      .from('participants')
+      .delete()
+      .eq('id', existing.id)
   }
 
   const { data: participant, error } = await supabase
