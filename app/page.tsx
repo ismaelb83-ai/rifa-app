@@ -192,7 +192,7 @@ export default function LandingPage() {
           className="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-3"
         >
           <div className="flex justify-between items-center">
-            <span className="text-sm text-gray-300 font-medium">🎟️ Boletos vendidos</span>
+            <span className="text-sm text-gray-300 font-medium">🎟️ Boletos confirmados</span>
             <span className="font-bold text-white">{soldCount} / 100</span>
           </div>
           <div className="h-3 bg-white/10 rounded-full overflow-hidden">
