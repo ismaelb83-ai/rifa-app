@@ -314,22 +314,17 @@ export default function LandingPage() {
               >
                 {/* Imagen */}
                 <div className="relative aspect-square bg-black overflow-hidden">
-                  <motion.div
+                  <motion.img
                     key={currentImage}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="relative w-full h-full"
-                  >
-                    <Image
-                      src={currentImage}
-                      alt={`${premio.label} - ${imageIndex + 1}`}
-                      fill
-                      className="object-cover"
-                      priority
-                    />
-                  </motion.div>
+                    src={currentImage}
+                    alt={`${premio.label} - ${imageIndex + 1}`}
+                    className="w-full h-full object-cover"
+                    onError={(e) => console.error('Image load error:', currentImage, e)}
+                  />
                 </div>
 
                 {/* Info */}
