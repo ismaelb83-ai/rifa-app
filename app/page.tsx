@@ -41,21 +41,21 @@ const PREMIOS_DATA = [
     icon: '🔥',
     label: '1er Premio',
     sub: 'Asador + Carne',
-    images: ['/premios/asador1.jpg', '/premios/asador2.jpg', '/premios/asador3.jpg'],
+    images: ['/premios/asador1.webp', '/premios/asador2.webp', '/premios/asador3.webp'],
   },
   {
     id: 'whiskey',
     icon: '🥃',
     label: '2do Premio',
     sub: 'Whiskey + Botana',
-    images: ['/premios/whiskey1.jpg', '/premios/whiskey2.jpg'],
+    images: ['/premios/whiskey1.webp', '/premios/whiskey2.webp'],
   },
   {
     id: 'reloj',
     icon: '⌚',
     label: '3er Premio',
     sub: 'Reloj + Billetera',
-    images: ['/premios/reloj1.jpg', '/premios/reloj2.jpg'],
+    images: ['/premios/reloj1.webp', '/premios/reloj2.webp'],
   },
 ]
 
