@@ -1,9 +1,9 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import { Users, Trophy } from 'lucide-react'
+import { Users, Trophy, ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 
 /* COUNTDOWN — activar cuando se acerque la fecha del sorteo
@@ -35,9 +35,35 @@ function useCountdown() {
 }
 */
 
+const PREMIOS_DATA = [
+  {
+    id: 'asador',
+    icon: '🔥',
+    label: '1er Premio',
+    sub: 'Asador + Carne',
+    images: ['/premios/asador1.jpg', '/premios/asador2.jpg', '/premios/asador3.jpg'],
+  },
+  {
+    id: 'whiskey',
+    icon: '🥃',
+    label: '2do Premio',
+    sub: 'Whiskey + Botana',
+    images: ['/premios/whiskey1.jpg', '/premios/whiskey2.jpg'],
+  },
+  {
+    id: 'reloj',
+    icon: '⌚',
+    label: '3er Premio',
+    sub: 'Reloj + Billetera',
+    images: ['/premios/reloj1.jpg', '/premios/reloj2.jpg'],
+  },
+]
+
 export default function LandingPage() {
   const [soldCount, setSoldCount] = useState(0)
   const [loading, setLoading] = useState(true)
+  const [selectedPremio, setSelectedPremio] = useState<string | null>(null)
+  const [imageIndex, setImageIndex] = useState(0)
 
   useEffect(() => {
     async function fetchStats() {
@@ -115,16 +141,19 @@ export default function LandingPage() {
 
           {/* Contenido del premio */}
           <div className="grid grid-cols-3 gap-2">
-            {[
-              { icon: '🔥', label: '1er Premio', sub: 'Asador + Carne' },
-              { icon: '🥃', label: '2do Premio', sub: 'Whiskey + Botana' },
-              { icon: '⌚', label: '3er Premio', sub: 'Reloj + Billetera' },
-            ].map((item) => (
-              <div key={item.label} className="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
+            {PREMIOS_DATA.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => {
+                  setSelectedPremio(item.id)
+                  setImageIndex(0)
+                }}
+                className="bg-white/5 border border-white/10 rounded-xl p-3 text-center hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer active:scale-95"
+              >
                 <span className="text-2xl">{item.icon}</span>
                 <p className="text-white font-bold text-sm mt-1">{item.label}</p>
                 <p className="text-gray-500 text-xs">{item.sub}</p>
-              </div>
+              </button>
             ))}
           </div>
 
@@ -259,6 +288,102 @@ export default function LandingPage() {
           👨 Para el Mejor Papá
         </p>
       </div>
+
+      {/* Modal Carrusel de Premios */}
+      <AnimatePresence>
+        {selectedPremio && (() => {
+          const premio = PREMIOS_DATA.find((p) => p.id === selectedPremio)
+          if (!premio) return null
+          const currentImage = premio.images[imageIndex]
+          return (
+            <motion.div
+              key="modal-overlay"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedPremio(null)}
+              className="fixed inset-0 bg-black/70 flex items-center justify-center p-4 z-50"
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                onClick={(e) => e.stopPropagation()}
+                className="w-full max-w-sm bg-gray-900 border border-white/10 rounded-2xl overflow-hidden"
+              >
+                {/* Imagen */}
+                <div className="relative aspect-square bg-black">
+                  <motion.img
+                    key={currentImage}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    src={currentImage}
+                    alt={`${premio.label} - ${imageIndex + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                {/* Info */}
+                <div className="p-5 space-y-4">
+                  <div>
+                    <p className="text-gray-400 text-sm font-medium">{premio.label}</p>
+                    <p className="text-white font-bold text-lg">{premio.sub}</p>
+                  </div>
+
+                  {/* Indicador de página */}
+                  <div className="text-center text-gray-400 text-xs">
+                    {imageIndex + 1} de {premio.images.length}
+                  </div>
+
+                  {/* Controles */}
+                  <div className="flex items-center justify-between gap-3">
+                    <button
+                      onClick={() =>
+                        setImageIndex((i) =>
+                          i === 0 ? premio.images.length - 1 : i - 1
+                        )
+                      }
+                      disabled={premio.images.length === 1}
+                      className="p-2.5 rounded-lg bg-white/10 border border-white/20 text-white hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                    >
+                      <ChevronLeft className="w-5 h-5" />
+                    </button>
+
+                    <button
+                      onClick={() => setSelectedPremio(null)}
+                      className="px-4 py-2.5 rounded-lg bg-white/5 border border-white/20 text-gray-300 text-sm hover:bg-white/10 transition-all"
+                    >
+                      Cerrar
+                    </button>
+
+                    <button
+                      onClick={() =>
+                        setImageIndex((i) =>
+                          i === premio.images.length - 1 ? 0 : i + 1
+                        )
+                      }
+                      disabled={premio.images.length === 1}
+                      className="p-2.5 rounded-lg bg-white/10 border border-white/20 text-white hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                    >
+                      <ChevronRight className="w-5 h-5" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Close X */}
+                <button
+                  onClick={() => setSelectedPremio(null)}
+                  className="absolute top-3 right-3 p-2 rounded-lg bg-black/50 text-white hover:bg-black/70 transition-all"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </motion.div>
+            </motion.div>
+          )
+        })()}
+      </AnimatePresence>
     </main>
   )
 }
