@@ -56,7 +56,7 @@ const PREMIOS_DATA = [
     icon: '⌚',
     label: '3er Premio',
     sub: 'Reloj + Billetera',
-    images: ['/premios/reloj1.webp', '/premios/reloj2.webp'],
+    images: ['/premios/reloj1.webp', '/premios/reloj2.webp', '/premios/billetera1.webp', '/premios/billetera2.webp'],
   },
 ]
 
