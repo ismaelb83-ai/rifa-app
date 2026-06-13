@@ -212,7 +212,7 @@ export default function LandingPage() {
           </div>
           <div className="flex justify-between text-xs">
             <span className="text-gray-400">{loading ? '...' : `${available} boletos disponibles`}</span>
-            <span className="font-bold" style={{ color: '#d4a017' }}>{progress}% confirmado</span>
+            <span className="font-bold" style={{ color: '#d4a017' }}>{progress}% pagados</span>
           </div>
         </motion.div>
 
