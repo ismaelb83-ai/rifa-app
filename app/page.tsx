@@ -61,25 +61,31 @@ const PREMIOS_DATA = [
 ]
 
 export default function LandingPage() {
-  const [soldCount, setSoldCount] = useState(0)
+  const [confirmedCount, setConfirmedCount] = useState(0)
+  const [reservedCount, setReservedCount] = useState(0)
   const [loading, setLoading] = useState(true)
   const [selectedPremio, setSelectedPremio] = useState<string | null>(null)
   const [imageIndex, setImageIndex] = useState(0)
 
   useEffect(() => {
     async function fetchStats() {
-      const { count } = await supabase
+      const { count: confirmed } = await supabase
         .from('tickets')
         .select('*', { count: 'exact', head: true })
         .eq('status', 'confirmed')
-      setSoldCount(count ?? 0)
+      const { count: reserved } = await supabase
+        .from('tickets')
+        .select('*', { count: 'exact', head: true })
+        .eq('status', 'reserved')
+      setConfirmedCount(confirmed ?? 0)
+      setReservedCount(reserved ?? 0)
       setLoading(false)
     }
     fetchStats()
   }, [])
 
-  const progress = Math.round((soldCount / 100) * 100)
-  const remaining = 100 - soldCount
+  const available = 100 - confirmedCount - reservedCount
+  const progress = Math.round((confirmedCount / 100) * 100)
 
   return (
     <main className="pitch-bg min-h-screen flex flex-col items-center justify-center px-4 py-10 relative overflow-hidden">
@@ -192,8 +198,8 @@ export default function LandingPage() {
           className="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-3"
         >
           <div className="flex justify-between items-center">
-            <span className="text-sm text-gray-300 font-medium">🎟️ Boletos confirmados</span>
-            <span className="font-bold text-white">{soldCount} / 100</span>
+            <span className="text-sm text-gray-300 font-medium">🎟️ Boletos disponibles</span>
+            <span className="font-bold text-white">{available} / 100</span>
           </div>
           <div className="h-3 bg-white/10 rounded-full overflow-hidden">
             <motion.div
@@ -205,7 +211,7 @@ export default function LandingPage() {
             />
           </div>
           <div className="flex justify-between text-xs">
-            <span className="text-gray-400">{loading ? '...' : `${remaining} por confirmar`}</span>
+            <span className="text-gray-400">{loading ? '...' : `${available} boletos disponibles`}</span>
             <span className="font-bold" style={{ color: '#d4a017' }}>{progress}% confirmado</span>
           </div>
         </motion.div>
@@ -251,7 +257,7 @@ export default function LandingPage() {
 
         {/* CTAs */}
         <div className="space-y-3">
-          {remaining === 0 ? (
+          {available === 0 ? (
             <div
               className="w-full rounded-2xl px-6 py-5 flex flex-col items-center gap-1 opacity-50 cursor-not-allowed"
               style={{ background: 'linear-gradient(135deg, #00a651 0%, #007a3a 50%, #00a651 100%)' }}
